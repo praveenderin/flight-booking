@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Flight Booking</title>
+   </head>
+   <body>
+      <style>
+         body {
+         background-color: #242333;
+         color: #fff;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         font-family: 'Lato', sans-serif;
+         }
+         .seat-container select {
+         background-color: #fff;
+         border: 0;
+         border-radius: 5px;
+         font-size: 14px;
+         margin-left: 10px;
+         padding: 5px 15px 5px 15px;
+         appearance: none;
+         }
+         .seat {
+         background-color: #A9A9A9;
+         height: 30px;
+         width: 30px;
+         margin: 3px;
+         border-radius: 5px;
+         }
+         .seat.selected {
+         background-color: #0000FF !important;
+         }
+         .seat.occupied {
+         background-color:  #191970;
+         cursor: not-allowed;
+         }
+         .seat.economy {
+         background-color: #87CEFA;
+         }
+         .seat:nth-of-type(2) {
+         margin-right: 18px;
+         }
+         .row:nth-of-type(5) {
+         margin-top: 15px;
+         }
+         .row:nth-of-type(7) {
+         margin-top: 15px;
+         }
+         .seat:not(.occupied):hover {
+         cursor: pointer;
+         transform: scale(1.2);
+         }
+         .showcase .seat:not(.occupied):hover {
+         cursor: default;
+         transform: scale(1);
+         }
+         .showcase {
+         background: rgba(0, 0, 0, 0.1);
+         padding: 5px 10px;
+         border-radius: 5px;
+         color: #777;
+         list-style-type: none;
+         display: flex;
+         justify-content: space-between;
+         }
+         .showcase li {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 0 10px;
+         }
+         .showcase li small {
+         margin-left: 2px;
+         }
+         .float-right {
+         float: right;
+         }
+         .margin-left-20 {
+         margin-left: 20px;
+         }
+         .row {
+         display: flex;
+         }
+         p.text {
+         margin: 5px 0;
+         }
+         p.text span {
+         color: #6feaf6;
+         }
+      </style>
+      <div class="seat-container">
+         <label>Choose flight</label>
+         <select id="flight-seat">
+            <option value="800">Air India ($800)</option>
+            <option value="1200">Vistara ($1200)</option>
+            <option value="800">Air Asia($800)</option>
+            <option value="900">Emirates ($900)</option>
+         </select>
+      </div>
+      <ul class="showcase">
+         <li>
+            <div class="seat"></div>
+            <small>Available</small>
+         </li>
+         <li>
+            <div class="seat selected"></div>
+            <small>Selected</small>
+         </li>
+         <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+         </li>
+         <li>
+            <div class="seat economy"></div>
+            <small>Economy</small>
+         </li>
+      </ul>
+      <div class="container">
+         <div class="float-right margin-left-20">
+            <h4>Selected Seat & additional charges</h4>
+            <div id="selected-seats"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" title="R1S1" data-seat-number="1" data-add-charges="$200" data-row="1"></div>
+            <div class="seat occupied" title="R1S2" data-seat-number="2" data-row="1" data-add-charges="$50"></div>
+            <div class="seat occupied" title="R1S3" data-seat-number="3" data-row="1" data-add-charges="$50"></div>
+            <div class="seat" title="R1S4" data-seat-number="4" data-row="1" data-add-charges="$50"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" title="R2S5" data-seat-number="5" data-add-charges="$200" data-row="2"></div>
+            <div class="seat occupied" data-seat-number="6" title="R2S6" data-row="2" data-add-charges="$50"></div>
+            <div class="seat occupied" title="R2S7" data-seat-number="7" data-row="2"></div>
+            <div class="seat occupied" title="R2S8" data-seat-number="8" data-row="2"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" title="R3S9" data-seat-number="9" data-add-charges="$200" data-row="3"></div>
+            <div class="seat occupied" data-seat-number="10" title="R3S10" data-row="3" data-add-charges="$50"></div>
+            <div class="seat occupied" title="R3S11" data-seat-number="11" data-row="3"></div>
+            <div class="seat occupied" title="R3S12" data-seat-number="12" data-row="3"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" data-seat-number="13" title="R4S13" data-add-charges="$200" data-row="4"></div>
+            <div class="seat" data-seat-number="14" title="R4S14" data-add-charges="$50" data-row="4"></div>
+            <div class="seat" data-seat-number="15" title="R4S15" data-add-charges="$50" data-row="4"></div>
+            <div class="seat" data-seat-number="16" title="R4S16" data-add-charges="$50" data-row="4"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" data-seat-number="17" title="R5S17" data-add-charges="$200" data-row="5"></div>
+            <div class="seat occupied" data-seat-number="18" title="R5S18" data-row="5"></div>
+            <div class="seat" data-seat-number="19" title="R5S19" data-add-charges="$50" data-row="5"></div>
+            <div class="seat" data-seat-number="20" title="R5S20" data-add-charges="$50" data-row="5"></div>
+         </div>
+         <div class="row">
+            <div class="seat economy" title="R6S21" data-seat-number="21" data-add-charges="$200" data-row="6"></div>
+            <div class="seat occupied" title="R6S22" data-seat-number="22" data-row="6"></div>
+            <div class="seat occupied" title="R6S23" data-seat-number="23" data-row="6"></div>
+            <div class="seat occupied" title="R6S24" data-seat-number="24" data-row="6"></div>
+         </div>
+         <div class="row">
+            <div class="seat occupied" title="R7S25" data-seat-number="25" data-add-charges="$200" data-row="7"></div>
+            <div class="seat occupied" title="R7S26" data-seat-number="26" data-row="7"></div>
+            <div class="seat occupied" title="R7S27" data-seat-number="27" data-row="7"></div>
+            <div class="seat occupied" title="R7S28" data-seat-number="28" data-row="7"></div>
+         </div>
+      </div>
+      <p class="text">
+         You have selected <span id="count">0</span> seats for a price of $<span
+            id="total"
+            >0</span
+            >
+      <p> (Excluding additional charges)</p>
+      </p>
+      <script>
+         const container = document.querySelector('.container');
+         const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+         const count = document.getElementById('count');
+         const total = document.getElementById('total');
+         const selectedSeats = document.getElementById('selected-seats');
+         const flightSelect = document.getElementById('flight-seat');
+         
+         let ticketPrice = +flightSelect.value;
+         
+         let selectedSeatList = JSON.parse(localStorage.getItem('selectedSeatList'))  || [];
+         
+         populateUI();
+         
+         function setFlightData(index, price) {
+         localStorage.setItem('selectedSeatIndex', index);
+         localStorage.setItem('selectedSeatPrice', price);
+         }
+         function updateSelectedSeatList () {
+         selectedSeats.innerHTML = selectedSeatList.length ? selectedSeatList.join('<br>') : '-';
+         }
+         function updateSelectedCount() {
+         const selectedSeats = document.querySelectorAll('.row .seat.selected');
+         
+         const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
+         
+         localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+         
+         const selectedSeatsCount = selectedSeats.length;
+         
+         count.innerText = selectedSeatsCount;
+         total.innerText = selectedSeatsCount * ticketPrice;
+         
+         setFlightData(flightSelect.selectedIndex, flightSelect.value);
+         }
+         
+         // Get data from localstorage and populate UI
+         function populateUI() {
+         const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+         
+         if (selectedSeats !== null && selectedSeats.length > 0) {
+         seats.forEach((seat, index) => {
+           if (selectedSeats.indexOf(index) > -1) {
+             seat.classList.add('selected');
+           }
+         });
+         }
+         
+         const selectedSeatIndex = localStorage.getItem('selectedSeatIndex');
+         
+         if (selectedSeatIndex !== null) {
+         flightSelect.selectedIndex = selectedSeatIndex;
+         }
+         ticketPrice = +localStorage.getItem('selectedSeatPrice');
+         updateSelectedCount();
+         updateSelectedSeatList();
+         }
+         flightSelect.addEventListener('change', e => {
+         ticketPrice = +e.target.value;
+         setFlightData(e.target.selectedIndex, e.target.value);
+         updateSelectedCount();
+         });
+         container.addEventListener('click', e => {
+         if (
+         e.target.classList.contains('seat') &&
+         !e.target.classList.contains('occupied')
+         ) {
+         e.target.classList.toggle('selected');
+         if (e.target.classList.contains('selected')) {
+           selectedSeatList.push(e.target.title + ' - ' + e.target.dataset.addCharges);
+         } else {
+           let index = selectedSeatList.findIndex((value) => value === e.target.title + ' - ' + e.target.dataset.addCharges);
+           selectedSeatList.splice(index, 1);
+         }
+         localStorage.setItem('selectedSeatList', JSON.stringify(selectedSeatList));
+         updateSelectedCount();
+         updateSelectedSeatList();
+         }
+         });
+      </script>
+   </body>
+</html>
